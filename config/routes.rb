@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   get  'users/:id/feed'  => 'users#feed'
   post 'users/:id/add_episode'  => 'users#add_episode'
   get  'users/:id/suggestions'  => 'users#suggestions'
-  post 'users/' => 'users#create'
+  post 'users' => 'users#create'
+  get  'users/:id' => 'users#show'
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales

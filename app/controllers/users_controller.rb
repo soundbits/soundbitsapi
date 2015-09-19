@@ -6,7 +6,14 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.rss { render :layout => false }
     end
+  end
 
+  def show
+    @user = User.find(params[:id])
+    binding.pry
+    respond_to do |format|
+      format.json{render json: @user.to_json(:methods => :suggestions, :include=> :episodes )}
+    end
   end
 
   def create
