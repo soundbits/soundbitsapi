@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  protect_from_forgery :except => :create 
   def feed
     @user = User.find(params[:id])
     @episodes = @user.episodes.all
