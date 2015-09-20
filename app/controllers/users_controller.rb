@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  protect_from_forgery :except => :create
+  protect_from_forgery :except => [:create, :reject_episode, :add_episode]
   def feed
     @user = User.find(params[:id])
     @episodes = @user.episodes.all
@@ -30,14 +30,28 @@ class UsersController < ApplicationController
   def add_episode
     @user    = User.find(params["id"])
     @episode = Episode.find(params["episode_id"])
-    @user.episodes << @episode
+    @user.episodes << @episode unless @user.episodes.pluck(:id).include? @episode.id
+
+    respond_to do |format|
+      format.json { render json: @user.to_json}
+    end
+  end
+
+  def reject_episode
+    @user    = User.find(params["id"])
+    @episode = Episode.find(params["episode_id"])
+
+    @user.rejections << @episode unless @user.rejections.pluck(:id).include? @episode.id
     respond_to do |format|
       format.json { render json: @user.to_json}
     end
   end
 
   def suggestions
-    @episodes = Episode.all.sample(20)
+    @user = User.find(params["id"])
+    rejection_list = @user.rejections.pluck(:episode_id)
+
+    @episodes = Episode.random_sample(10).where("id NOT IN (?)", rejection_list).all
     respond_to do |format|
       format.json {render json: @episodes}
     end
