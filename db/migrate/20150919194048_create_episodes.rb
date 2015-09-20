@@ -9,6 +9,7 @@ class CreateEpisodes < ActiveRecord::Migration
       t.string    :audio_url
       t.string    :audio_length
       t.string    :excerpt_text
+      t.string    :excerpt_url
       t.string    :episode_duration
       t.integer   :start_time
       t.integer   :end_time

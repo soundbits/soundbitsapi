@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150919195020) do
     t.string   "audio_url"
     t.string   "audio_length"
     t.string   "excerpt_text"
+    t.string   "excerpt_url"
     t.string   "episode_duration"
     t.integer  "start_time"
     t.integer  "end_time"
