@@ -1,0 +1,12 @@
+<%= form_for @episode, url:"/episode/create" do |f| %>
+
+  Podcast Name: <%=f.text_field  :podcast%><br />
+  Episode Name: <%=f.text_field  :full_name%><br />
+  Episode Description: <%=f.text_field  :description%><br />
+  Podcast Image URL: <%=f.text_field  :podcast_image_url%><br />
+  Podcast audio URL: <%=f.text_field  :audio_url%><br />
+  Excerpt Text: <%=f.text_field  :excerpt_text%><br />
+  Excerpt URL: <%=f.text_field  :excerpt_url%><br />
+
+  <%= f.submit %>
+<% end %>
